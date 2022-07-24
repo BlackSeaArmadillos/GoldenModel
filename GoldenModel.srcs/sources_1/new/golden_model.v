@@ -20,6 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 `define D_BITS      32
 `define A_BITS      10
+`define I_BITS      16
+`define R_SIZE      8
 
 `define R0          3'd0
 `define R1          3'd1
@@ -36,25 +38,31 @@
 `define AND         7'b0000011
 `define OR          7'b0000100
 
-`define LOAD        5'b00010
-`define LOADC       5'b00011
-`define STORE       5'b00100
+`define LD          5'b00010
+`define LDC         5'b00011
+`define STR         5'b00100
 
 `define JMP         4'b0011
 `define JMPR        4'b0100
-`define JMPcond     4'b0110
-`define JMPRcond    4'b0111
+`define JMPc        4'b0110
+`define JMPRc       4'b0111
 `define HALT        16'b1111111111111111
 
 
 module golden_model(
-    input [15:0] instruction,
-    input [31:0] data_input,
+    input [`I_BITS-1:0] instruction,
+    input [`D_BITS-1:0] data_input,
+    
     input clk,
     input rst,
     
-    output [31:0] data_output
+    output reg [31:0] data_output,
+    output reg read,
+    output reg write,
+    output reg [`A_BITS-1:0] pc
     );
+    
+    reg [`D_BITS-1:0] register [0:`R_SIZE-1];
     
     always@(posedge clk) begin
         if(rst) begin
@@ -62,10 +70,89 @@ module golden_model(
         end
         else begin
             casex(instruction[15:9]) 
-                `ADD:       ;
+// ==========================================================================================================================            
+                `NOP:       begin
+                                read <= 0;
+                                write <= 0;
+                                pc <= pc + 1;
+                            end
+// ==========================================================================================================================                            
+                `ADD:       begin
+                                register[instruction[8:6]] = register[instruction[5:3]] + register[instruction[2:0]];
+                                read <= 0;
+                                write <= 0;
+                                pc <= pc + 1;
+                            end
+// ==========================================================================================================================                            
+                `SUB:       begin
+                                register[instruction[8:6]] = register[instruction[5:3]] - register[instruction[2:0]];
+                                read <= 0;
+                                write <= 0;
+                                pc <= pc + 1;
+                            end
+// ==========================================================================================================================                            
+                `AND:       begin
+                                register[instruction[8:6]] = register[instruction[5:3]] & register[instruction[2:0]];
+                                read <= 0;
+                                write <= 0;
+                                pc <= pc + 1;
+                            end
+// ==========================================================================================================================                            
+                `OR:        begin
+                                register[instruction[8:6]] = register[instruction[5:3]] | register[instruction[2:0]];
+                                read <= 0;
+                                write <= 0;
+                                pc <= pc + 1;
+                            end
+// ==========================================================================================================================                            
+                `LD:        begin
+                                read <= 0;
+                                write <= 0;
+                                pc <= pc + 1;
+                                register[instruction[10:8]] = data_input;
+                            end
+// ==========================================================================================================================                            
+                `LDC:       begin
+                
+                            end
+// ==========================================================================================================================                            
+                `STR:       begin
+                
+                            end
+// ==========================================================================================================================                            
+                `JMP:       begin
+                
+                            end
+// ==========================================================================================================================                            
+                `JMPR:      begin
+                
+                            end
+// ==========================================================================================================================                            
+                `JMPc:      begin
+                
+                            end
+// ==========================================================================================================================                            
+                `JMPRc:     begin
+                
+                            end
+// ==========================================================================================================================                            
+                `HALT:      begin
+                
+                            end
             endcase
         end
     end
     
+    
+    always@(posedge clk) begin
+        if(rst) begin
+            pc <= 0;
+            read <= 0;
+            write <= 0;
+        end
+        else begin
+            pc <= pc + 1;
+        end
+    end
     
 endmodule
