@@ -83,11 +83,12 @@ initial begin
     instr_mem_t[4] <= {`LDC, `R1, 8'd8};
     instr_mem_t[6] <= {`ADD, `R2, `R1, `R0};
     instr_mem_t[8] <= {`STR, `R0, `RESERVED, `R2};
-    instr_mem_t[9] <= {`LD, `R0, `RESERVED, `R2};
+    instr_mem_t[10] <= {`LD, `R3, `RESERVED, `R0};
+    
 //    instr_mem_t[9] <= {`LDC, `R4, 8'd3};
     
     
-    #80;
+    #90;
     
     $stop();
 end
