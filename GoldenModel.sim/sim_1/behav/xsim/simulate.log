@@ -1,0 +1,26 @@
+Time resolution is 1 ps
+RAM =          x
+RAM =          x
+RAM =          x
+RAM =          x
+RAM =          x
+RAM =          x
+RAM =          x
+RAM =          x
+RAM =          x
+RAM =          x
+Stopped at time : 42 ns : File "C:/Users/PaulF/Desktop/Projects si ckt-uri/FPGA Projects/Vivado Projects/DSD2_PR/GoldenModel/GoldenModel.srcs/sources_1/new/golden_model.v" Line 128
+RAM =          x
+RAM =          x
+Stopped at time : 46 ns : File "C:/Users/PaulF/Desktop/Projects si ckt-uri/FPGA Projects/Vivado Projects/DSD2_PR/GoldenModel/GoldenModel.srcs/sources_1/new/RAM.v" Line 45
+RAM =         11
+RAM =         11
+RAM =         11
+RAM =         11
+RAM =         11
+RAM =         11
+RAM =         11
+RAM =         11
+RAM =         11
+RAM =         11
+Stopped at time : 90 ns : File "C:/Users/PaulF/Desktop/Projects si ckt-uri/FPGA Projects/Vivado Projects/DSD2_PR/GoldenModel/GoldenModel.srcs/sim_1/new/testbench.v" Line 91

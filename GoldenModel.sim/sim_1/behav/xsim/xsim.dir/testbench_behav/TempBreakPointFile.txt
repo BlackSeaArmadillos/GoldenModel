@@ -1,0 +1,4 @@
+Breakpoint File Version 1.0
+91,true,"C:/Users/PaulF/Desktop/Projects si ckt-uri/FPGA Projects/Vivado Projects/DSD2_PR/GoldenModel/GoldenModel.srcs/sim_1/new/testbench.v"
+45,true,"C:/Users/PaulF/Desktop/Projects si ckt-uri/FPGA Projects/Vivado Projects/DSD2_PR/GoldenModel/GoldenModel.srcs/sources_1/new/RAM.v"
+128,true,"C:/Users/PaulF/Desktop/Projects si ckt-uri/FPGA Projects/Vivado Projects/DSD2_PR/GoldenModel/GoldenModel.srcs/sources_1/new/golden_model.v"

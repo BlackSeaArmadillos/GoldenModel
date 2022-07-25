@@ -38,14 +38,14 @@
 `define AND         7'b0000011
 `define OR          7'b0000100
 
-`define LD          5'b00010
-`define LDC         5'b00011
-`define STR         5'b00100
+`define LD          7'b00010xx
+`define LDC         7'b00011xx
+`define STR         7'b00100xx
 
-`define JMP         4'b0011
-`define JMPR        4'b0100
-`define JMPc        4'b0110
-`define JMPRc       4'b0111
+`define JMP         7'b0011xxx
+`define JMPR        7'b0100xxx
+`define JMPc        7'b0110xxx
+`define JMPRc       7'b0111xxx
 `define HALT        16'b1111111111111111
 
 
@@ -57,6 +57,7 @@ module golden_model(
     input rst,
     
     output reg [31:0] data_output,
+    output reg [`A_BITS-1:0] addr,
     output reg read,
     output reg write,
     output reg [`A_BITS-1:0] pc
@@ -106,18 +107,25 @@ module golden_model(
                             end
 // ==========================================================================================================================                            
                 `LD:        begin
-                                read <= 0;
+                                read <= 1;
                                 write <= 0;
                                 pc <= pc + 1;
-                                register[instruction[10:8]] = data_input;
+                                addr <= register[instruction[2:0]];
+                                register[instruction[10:8]] <= data_input;
                             end
 // ==========================================================================================================================                            
                 `LDC:       begin
-                
+                                read <= 0;
+                                write <= 0;
+                                pc <= pc + 1;
+                                register[instruction[10:8]] <= instruction[7:0];
                             end
 // ==========================================================================================================================                            
                 `STR:       begin
-                
+                                read <= 0;
+                                write <= 1;
+                                addr <= register[instruction[10:8]];
+                                data_output <= register[instruction[2:0]];
                             end
 // ==========================================================================================================================                            
                 `JMP:       begin
